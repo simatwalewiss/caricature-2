@@ -1,0 +1,49 @@
+trigger:
+  branches:
+    include: [main]
+  paths:
+    include:
+      - frontend/*
+      - pipelines/frontend.yml
+
+pr: none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  azureSubscription: 'azure-caricature'
+  appName: 'rdd-caricature'        # frontend App Service name
+
+steps:
+  - task: NodeTool@0
+    displayName: Use Node 20
+    inputs:
+      versionSpec: '20.x'
+
+  - script: npm ci
+    displayName: Install dependencies
+    workingDirectory: frontend
+
+  - script: npm run build
+    displayName: Build React app
+    workingDirectory: frontend
+    env:
+      CI: 'false'      # stops CRA treating lint warnings as build errors
+
+  - task: ArchiveFiles@2
+    displayName: Zip build output
+    inputs:
+      rootFolderOrFile: '$(System.DefaultWorkingDirectory)/frontend/build'
+      includeRootFolder: false
+      archiveType: zip
+      archiveFile: '$(Build.ArtifactStagingDirectory)/frontend.zip'
+      replaceExistingArchive: true
+
+  - task: AzureWebApp@1
+    displayName: Deploy to frontend App Service
+    inputs:
+      azureSubscription: '$(azureSubscription)'
+      appType: webAppLinux
+      appName: '$(appName)'
+      package: '$(Build.ArtifactStagingDirectory)/frontend.zip'
