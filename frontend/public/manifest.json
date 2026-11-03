@@ -1,0 +1,25 @@
+{
+  "short_name": "Red Dot Distribution",
+  "name": "Red Dot Distribution - To A Future Without Limits",
+  "icons": [
+    {
+      "src": "logo.gif",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/gif"
+    },
+    {
+      "src": "logo.gif",
+      "type": "image/gif",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo.gif",
+      "type": "image/gif",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0B0A5C",
+  "background_color": "#07073A"
+}

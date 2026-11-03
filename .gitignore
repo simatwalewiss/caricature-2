@@ -1,0 +1,25 @@
+node_modules/
+build/
+dist/
+
+# secrets and local overrides
+.env
+.env.local
+.env.*.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# local test files
+input.jpg
+output*.png
+result.jpg
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
