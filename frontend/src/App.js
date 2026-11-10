@@ -10,11 +10,20 @@ if (!API_BASE) {
 
 const MIRROR_SELFIE_PREVIEW = true;
 const COUNTDOWN_SECONDS = 3;
+
+// ── Print layout (tune these when calibrating a printer) ──
+// Paper size: 5×7 in, same shape as the 1270×1780 composed image
+const PRINT_PAPER_MM = { width: 127, height: 178 };
+// White border kept clear of the printer's unprintable edge
+const PRINT_SAFE_MARGIN_MM = 6;
+// Nudge the print if it lands off-centre: +x moves right, +y moves down (negative values allowed)
+const PRINT_OFFSET_MM = { x: 0, y: 0 };
 const POLL_INTERVAL = 1000;
 
 // Uploads are downscaled to this long side before sending (models output ≤1024px)
 const UPLOAD_MAX_SIDE = 1024;
 const UPLOAD_JPEG_QUALITY = 0.9;
+
 
 // Both models of a mode always run; the fallback is shown only if the primary fails.
 // flux-2-pro stays registered on the backend for future use.
